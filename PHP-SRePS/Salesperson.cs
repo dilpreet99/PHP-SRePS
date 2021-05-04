@@ -6,7 +6,7 @@ public class Salesperson
 	private int _staffID;
 	private string _firstName;
 	private string _lastName;
-	//private List<Sale> _sales = new List<Sale>;
+	private List<Sale> _sales = new List<Sale>();
 	private DateTime _hoursThisWeek;
 	private DateTime _hoursTotal;
 
