@@ -1,7 +1,7 @@
 ﻿
 namespace PHP_SRePS
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -33,6 +33,8 @@ namespace PHP_SRePS
             this.lblVersion = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnClock = new System.Windows.Forms.Button();
+            this.btnEmployeeEdit = new System.Windows.Forms.Button();
             this.lblBusinessPassword = new System.Windows.Forms.Label();
             this.btnBusinessPasswordEdit = new System.Windows.Forms.Button();
             this.txbBusinessPassword = new System.Windows.Forms.TextBox();
@@ -58,7 +60,6 @@ namespace PHP_SRePS
             this.txbBusinessName = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.btnEmployeeEdit = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
@@ -81,7 +82,7 @@ namespace PHP_SRePS
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(56, 14);
             this.lblVersion.TabIndex = 2;
-            this.lblVersion.Text = "V_1.0.0";
+            this.lblVersion.Text = "V_1.0.1";
             // 
             // tabControl1
             // 
@@ -96,6 +97,7 @@ namespace PHP_SRePS
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnClock);
             this.tabPage1.Controls.Add(this.btnEmployeeEdit);
             this.tabPage1.Controls.Add(this.lblBusinessPassword);
             this.tabPage1.Controls.Add(this.btnBusinessPasswordEdit);
@@ -128,6 +130,28 @@ namespace PHP_SRePS
             this.tabPage1.Text = "Business";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btnClock
+            // 
+            this.btnClock.Enabled = false;
+            this.btnClock.Font = new System.Drawing.Font("Corbel", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnClock.Location = new System.Drawing.Point(230, 279);
+            this.btnClock.Name = "btnClock";
+            this.btnClock.Size = new System.Drawing.Size(150, 33);
+            this.btnClock.TabIndex = 25;
+            this.btnClock.Text = "CLOCK IN";
+            this.btnClock.UseVisualStyleBackColor = true;
+            this.btnClock.Click += new System.EventHandler(this.btnClock_Click);
+            // 
+            // btnEmployeeEdit
+            // 
+            this.btnEmployeeEdit.Location = new System.Drawing.Point(230, 327);
+            this.btnEmployeeEdit.Name = "btnEmployeeEdit";
+            this.btnEmployeeEdit.Size = new System.Drawing.Size(150, 23);
+            this.btnEmployeeEdit.TabIndex = 24;
+            this.btnEmployeeEdit.Text = "Edit Employee";
+            this.btnEmployeeEdit.UseVisualStyleBackColor = true;
+            this.btnEmployeeEdit.Click += new System.EventHandler(this.btnEmployeeEdit_Click);
+            // 
             // lblBusinessPassword
             // 
             this.lblBusinessPassword.AutoSize = true;
@@ -151,10 +175,10 @@ namespace PHP_SRePS
             // 
             this.txbBusinessPassword.Location = new System.Drawing.Point(352, 29);
             this.txbBusinessPassword.Name = "txbBusinessPassword";
-            this.txbBusinessPassword.PasswordChar = '*';
             this.txbBusinessPassword.ReadOnly = true;
             this.txbBusinessPassword.Size = new System.Drawing.Size(147, 23);
             this.txbBusinessPassword.TabIndex = 21;
+            this.txbBusinessPassword.UseSystemPasswordChar = true;
             // 
             // txbHoursTotal
             // 
@@ -354,17 +378,7 @@ namespace PHP_SRePS
             this.tabPage3.Text = "Reporting";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // btnEmployeeEdit
-            // 
-            this.btnEmployeeEdit.Location = new System.Drawing.Point(230, 327);
-            this.btnEmployeeEdit.Name = "btnEmployeeEdit";
-            this.btnEmployeeEdit.Size = new System.Drawing.Size(150, 23);
-            this.btnEmployeeEdit.TabIndex = 24;
-            this.btnEmployeeEdit.Text = "Edit Employee";
-            this.btnEmployeeEdit.UseVisualStyleBackColor = true;
-            this.btnEmployeeEdit.Click += new System.EventHandler(this.btnEmployeeEdit_Click);
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -372,8 +386,8 @@ namespace PHP_SRePS
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.lblTitle);
-            this.Name = "Form1";
-            this.Text = "SRaPS V_1.0.0 (Startup)";
+            this.Name = "MainForm";
+            this.Text = "SRaPS V_1.0.1 (Startup)";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -414,6 +428,7 @@ namespace PHP_SRePS
         private System.Windows.Forms.Button btnBusinessPasswordEdit;
         private System.Windows.Forms.TextBox txbBusinessPassword;
         private System.Windows.Forms.Button btnEmployeeEdit;
+        private System.Windows.Forms.Button btnClock;
     }
 }
 

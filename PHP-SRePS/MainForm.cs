@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace PHP_SRePS
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         public Business business = new Business("Default Business", "admin");
         BindingSource staffBindingSource = new BindingSource();
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             staffBindingSource.DataSource = business.Staff;
@@ -50,9 +50,11 @@ namespace PHP_SRePS
 
         private void btnRemoveEmployee_Click(object sender, EventArgs e)
         {
-            Salesperson target = business.Staff[lsbEmployees.SelectedIndex];
-            business.Staff.Remove(target);
-            staffBindingSource.ResetBindings(false);
+            if (lsbEmployees.Items.Count > 0)
+            {
+                business.Staff.Remove(business.Staff[lsbEmployees.SelectedIndex]);
+                staffBindingSource.ResetBindings(false);
+            }
         }
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
@@ -60,11 +62,7 @@ namespace PHP_SRePS
             business.AddStaff("New", "Salesperson");
             staffBindingSource.ResetBindings(false);
 
-            //Update employee details
-            Salesperson target = business.Staff[lsbEmployees.SelectedIndex];
-            txbStaffID.Text = target.StaffID.ToString();
-            txbFirstName.Text = target.FirstName;
-            txbLastName.Text = target.LastName;
+            FillEmployeeDetails(business.Staff[lsbEmployees.SelectedIndex]);
         }
 
         private void btnBusinessPasswordEdit_Click(object sender, EventArgs e)
@@ -80,7 +78,7 @@ namespace PHP_SRePS
                 btnBusinessPasswordEdit.Text = "Edit";
                 if (txbBusinessPassword.Text != "")
                 {
-                    business.ChangePassword(txbBusinessPassword.Text);
+                    Authorise("Administrator", business.Password, btnBusinessPasswordEdit);
                 }
                 else
                 {
@@ -94,17 +92,13 @@ namespace PHP_SRePS
             if (lsbEmployees.SelectedIndex < 0)
             {
                 //Empty the employee details if there are no employees
-                txbStaffID.Text = "";
-                txbFirstName.Text = "";
-                txbLastName.Text = "";
+                EmptyEmployeeDetails();
             }
             else
             {
                 //Fill in the employee details for the selected employee
                 Salesperson target = business.Staff[lsbEmployees.SelectedIndex];
-                txbStaffID.Text = target.StaffID.ToString();
-                txbFirstName.Text = target.FirstName;
-                txbLastName.Text = target.LastName;
+                FillEmployeeDetails(target);
             }
         }
 
@@ -121,6 +115,84 @@ namespace PHP_SRePS
                 txbFirstName.ReadOnly = true;
                 txbLastName.ReadOnly = true;
                 btnEmployeeEdit.Text = "Edit Employee";
+                if (txbFirstName.Text != "" && txbLastName.Text != "")
+                {
+                    //Update the business staff object if both textboxes are not empty
+                    Authorise("Administrator", business.Password, btnEmployeeEdit);
+                } else
+                {
+                    //If one of the textboxes is empty disregard changes and revert textbox text
+                    FillEmployeeDetails(business.Staff[lsbEmployees.SelectedIndex]);
+                }
+            }
+        }
+
+        private void btnClock_Click(object sender, EventArgs e)
+        {
+            if (lsbEmployees.Items.Count > 0)
+            {
+                Salesperson target = business.Staff[lsbEmployees.SelectedIndex];
+
+                if (target.DayStart == DateTime.MinValue)
+                {
+                    btnClock.Text = "CLOCK OUT";
+                    target.DayStart = DateTime.Now;
+                }
+                else
+                {
+                    btnClock.Text = "CLOCK IN";
+                    target.DayEnd = DateTime.Now;
+                    target.AddDayHours();
+                    FillEmployeeDetails(target);
+                }
+            }
+        }
+
+        public void FillEmployeeDetails(Salesperson target)
+        {
+            txbStaffID.Text = target.StaffID.ToString();
+            txbFirstName.Text = target.FirstName;
+            txbLastName.Text = target.LastName;
+            txbHoursThisWeek.Text = target.HoursThisWeek.TotalHours.ToString("N2");
+            txbHoursTotal.Text = target.HoursTotal.TotalHours.ToString("N2");
+
+            //Reset the clock state if the employee is clocked in/out
+            if (target.DayStart == DateTime.MinValue)
+            {
+                btnClock.Text = "CLOCK IN";
+            }
+            else
+            {
+                btnClock.Text = "CLOCK OUT";
+            }
+            btnClock.Enabled = true;
+        }
+
+        public void EmptyEmployeeDetails()
+        {
+            txbStaffID.Text = "";
+            txbFirstName.Text = "";
+            txbLastName.Text = "";
+            btnClock.Enabled = false;
+        }
+
+        public void Authorise(string username, string password, object sender)
+        {
+            //Create a login form which will ask the user for a password
+            LoginForm login = new LoginForm(this, username, password, sender);
+            login.Show();
+            this.Enabled = false;
+        }
+
+        public void PostAuthorise(object sender)
+        {
+            //Do different things depending on who requested the authorisation
+            ///Saving change in business password
+            if (sender == btnBusinessPasswordEdit)
+                business.ChangePassword(txbBusinessPassword.Text);
+            ///Saving change in employee data
+            if (sender == btnEmployeeEdit)
+            {
                 business.UpdateStaff(lsbEmployees.SelectedIndex, txbFirstName.Text, txbLastName.Text);
                 staffBindingSource.ResetBindings(false);
             }
