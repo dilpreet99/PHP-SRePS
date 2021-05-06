@@ -42,7 +42,7 @@ public class Business
     {
 		_staff[index].FirstName = firstName;
 		_staff[index].LastName = lastName;
-		_staff[index].ListString = firstName + " " + lastName;
+		_staff[index].FullName = firstName + " " + lastName;
 	}
 
 	public void ChangePassword(string newPassword)

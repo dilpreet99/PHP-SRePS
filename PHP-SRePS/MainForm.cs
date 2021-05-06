@@ -19,10 +19,9 @@ namespace PHP_SRePS
         {
             InitializeComponent();
             staffBindingSource.DataSource = business.Staff;
-            txbBusinessName.Text = business.Name;
-            txbBusinessPassword.Text = business.Password;
+            Refill();
 
-            lsbEmployees.DisplayMember = "ListString";
+            lsbEmployees.DisplayMember = "FullName";
             //lsbEmployees.ValueMember = 
             lsbEmployees.DataSource = staffBindingSource;
 
@@ -40,7 +39,7 @@ namespace PHP_SRePS
                 btnBusinessNameEdit.Text = "Edit";
                 if(txbBusinessName.Text != "")
                 {
-                    business.Name = txbBusinessName.Text;
+                    Authorise("Administrator", business.Password, btnBusinessNameEdit);
                 } else
                 {
                     txbBusinessName.Text = business.Name;
@@ -50,8 +49,13 @@ namespace PHP_SRePS
 
         private void btnRemoveEmployee_Click(object sender, EventArgs e)
         {
-            if (lsbEmployees.Items.Count > 0)
+            if (business.Staff[lsbEmployees.SelectedIndex].FullName != "New Salesperson")
             {
+                Authorise("Administrator", business.Password, btnRemoveEmployee);
+            }
+            else
+            {
+                //Allow user to delete default salespeople without authorising
                 business.Staff.Remove(business.Staff[lsbEmployees.SelectedIndex]);
                 staffBindingSource.ResetBindings(false);
             }
@@ -129,28 +133,29 @@ namespace PHP_SRePS
 
         private void btnClock_Click(object sender, EventArgs e)
         {
-            if (lsbEmployees.Items.Count > 0)
-            {
-                Salesperson target = business.Staff[lsbEmployees.SelectedIndex];
+            Salesperson target = business.Staff[lsbEmployees.SelectedIndex];
+            Authorise(target.FullName, target.Password, btnClock);
+        }
 
-                if (target.DayStart == DateTime.MinValue)
-                {
-                    btnClock.Text = "CLOCK OUT";
-                    target.DayStart = DateTime.Now;
-                }
-                else
-                {
-                    btnClock.Text = "CLOCK IN";
-                    target.DayEnd = DateTime.Now;
-                    target.AddDayHours();
-                    FillEmployeeDetails(target);
-                }
+        public void Refill()
+        {
+            //Refill pages with business data
+            txbBusinessName.Text = business.Name;
+            txbBusinessPassword.Text = business.Password;
+            if (lsbEmployees.SelectedIndex > 0 && lsbEmployees.SelectedIndex < lsbEmployees.Items.Count)
+            {
+                FillEmployeeDetails(business.Staff[lsbEmployees.SelectedIndex]);
+            } else
+            {
+                EmptyEmployeeDetails();
             }
+            staffBindingSource.ResetBindings(false);
         }
 
         public void FillEmployeeDetails(Salesperson target)
         {
             txbStaffID.Text = target.StaffID.ToString();
+            txbEmployeePassword.Text = target.Password;
             txbFirstName.Text = target.FirstName;
             txbLastName.Text = target.LastName;
             txbHoursThisWeek.Text = target.HoursThisWeek.TotalHours.ToString("N2");
@@ -166,14 +171,23 @@ namespace PHP_SRePS
                 btnClock.Text = "CLOCK OUT";
             }
             btnClock.Enabled = true;
+            btnEmployeeEdit.Enabled = true;
+            btnEmployeePasswordEdit.Enabled = true;
+            btnViewEmployeeSale.Enabled = true;
         }
 
         public void EmptyEmployeeDetails()
         {
             txbStaffID.Text = "";
+            txbEmployeePassword.Text = "";
             txbFirstName.Text = "";
             txbLastName.Text = "";
+            txbHoursThisWeek.Text = "";
+            txbHoursTotal.Text = "";
             btnClock.Enabled = false;
+            btnEmployeeEdit.Enabled = false;
+            btnEmployeePasswordEdit.Enabled = false;
+            btnViewEmployeeSale.Enabled = false;
         }
 
         public void Authorise(string username, string password, object sender)
@@ -187,14 +201,60 @@ namespace PHP_SRePS
         public void PostAuthorise(object sender)
         {
             //Do different things depending on who requested the authorisation
+            ///Saving change in business name
+            if (sender == btnBusinessNameEdit)
+                business.Name = txbBusinessName.Text;
             ///Saving change in business password
             if (sender == btnBusinessPasswordEdit)
                 business.ChangePassword(txbBusinessPassword.Text);
             ///Saving change in employee data
             if (sender == btnEmployeeEdit)
-            {
                 business.UpdateStaff(lsbEmployees.SelectedIndex, txbFirstName.Text, txbLastName.Text);
-                staffBindingSource.ResetBindings(false);
+            ///Saving change in employee data
+            if (sender == btnEmployeePasswordEdit && lsbEmployees.Items.Count > 0)
+                business.Staff[lsbEmployees.SelectedIndex].ChangePassword(txbEmployeePassword.Text);
+            //Clocking in or out
+            if(sender == btnClock)
+            {
+                Salesperson target = business.Staff[lsbEmployees.SelectedIndex];
+                if (target.DayStart == DateTime.MinValue)
+                {
+                    btnClock.Text = "CLOCK OUT";
+                    target.DayStart = DateTime.Now;
+                }
+                else
+                {
+                    btnClock.Text = "CLOCK IN";
+                    target.DayEnd = DateTime.Now;
+                    target.AddDayHours();
+                }
+            }
+            if(sender == btnRemoveEmployee)
+                business.Staff.Remove(business.Staff[lsbEmployees.SelectedIndex]);
+
+            Refill();
+        }
+
+        private void btnEmployeePasswordEdit_Click(object sender, EventArgs e)
+        {
+            if (txbEmployeePassword.ReadOnly)
+            {
+                txbEmployeePassword.ReadOnly = false;
+                btnEmployeePasswordEdit.Text = "Save";
+            }
+            else
+            {
+                txbEmployeePassword.ReadOnly = true;
+                btnEmployeePasswordEdit.Text = "Edit";
+                if (txbEmployeePassword.Text != "")
+                {
+                    Salesperson target = business.Staff[lsbEmployees.SelectedIndex];
+                    Authorise(target.FullName, target.Password, btnEmployeePasswordEdit);
+                }
+                else
+                {
+                    Refill();
+                }
             }
         }
     }

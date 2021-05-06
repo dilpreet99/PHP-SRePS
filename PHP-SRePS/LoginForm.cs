@@ -24,6 +24,7 @@ namespace PHP_SRePS
 
             InitializeComponent();
             lblUsername.Text = username;
+            this.FormClosing += new FormClosingEventHandler(LoginForm_FormClosing);
         }
 
         private void btnLoginForm_Click(object sender, EventArgs e)
@@ -35,11 +36,18 @@ namespace PHP_SRePS
                 _mainForm.Enabled = true;
                 _mainForm.PostAuthorise(_sender);
                 this.Close();
-            } else
+            }
+            else
             {
                 lblIncorrect.Visible = true;
                 txbPassword.Text = "";
             }
+        }
+
+        private void LoginForm_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            _mainForm.Enabled = true;
+            _mainForm.Refill();
         }
     }
 }

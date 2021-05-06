@@ -33,6 +33,9 @@ namespace PHP_SRePS
             this.lblVersion = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblEmployeePassword = new System.Windows.Forms.Label();
+            this.btnEmployeePasswordEdit = new System.Windows.Forms.Button();
+            this.txbEmployeePassword = new System.Windows.Forms.TextBox();
             this.btnClock = new System.Windows.Forms.Button();
             this.btnEmployeeEdit = new System.Windows.Forms.Button();
             this.lblBusinessPassword = new System.Windows.Forms.Label();
@@ -97,6 +100,10 @@ namespace PHP_SRePS
             // 
             // tabPage1
             // 
+            this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tabPage1.Controls.Add(this.lblEmployeePassword);
+            this.tabPage1.Controls.Add(this.btnEmployeePasswordEdit);
+            this.tabPage1.Controls.Add(this.txbEmployeePassword);
             this.tabPage1.Controls.Add(this.btnClock);
             this.tabPage1.Controls.Add(this.btnEmployeeEdit);
             this.tabPage1.Controls.Add(this.lblBusinessPassword);
@@ -130,6 +137,35 @@ namespace PHP_SRePS
             this.tabPage1.Text = "Business";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // lblEmployeePassword
+            // 
+            this.lblEmployeePassword.AutoSize = true;
+            this.lblEmployeePassword.Location = new System.Drawing.Point(352, 92);
+            this.lblEmployeePassword.Name = "lblEmployeePassword";
+            this.lblEmployeePassword.Size = new System.Drawing.Size(108, 15);
+            this.lblEmployeePassword.TabIndex = 28;
+            this.lblEmployeePassword.Text = "Personal password:";
+            // 
+            // btnEmployeePasswordEdit
+            // 
+            this.btnEmployeePasswordEdit.Enabled = false;
+            this.btnEmployeePasswordEdit.Location = new System.Drawing.Point(505, 110);
+            this.btnEmployeePasswordEdit.Name = "btnEmployeePasswordEdit";
+            this.btnEmployeePasswordEdit.Size = new System.Drawing.Size(75, 23);
+            this.btnEmployeePasswordEdit.TabIndex = 27;
+            this.btnEmployeePasswordEdit.Text = "Edit";
+            this.btnEmployeePasswordEdit.UseVisualStyleBackColor = true;
+            this.btnEmployeePasswordEdit.Click += new System.EventHandler(this.btnEmployeePasswordEdit_Click);
+            // 
+            // txbEmployeePassword
+            // 
+            this.txbEmployeePassword.Location = new System.Drawing.Point(352, 110);
+            this.txbEmployeePassword.Name = "txbEmployeePassword";
+            this.txbEmployeePassword.ReadOnly = true;
+            this.txbEmployeePassword.Size = new System.Drawing.Size(147, 23);
+            this.txbEmployeePassword.TabIndex = 26;
+            this.txbEmployeePassword.UseSystemPasswordChar = true;
+            // 
             // btnClock
             // 
             this.btnClock.Enabled = false;
@@ -144,6 +180,7 @@ namespace PHP_SRePS
             // 
             // btnEmployeeEdit
             // 
+            this.btnEmployeeEdit.Enabled = false;
             this.btnEmployeeEdit.Location = new System.Drawing.Point(230, 327);
             this.btnEmployeeEdit.Name = "btnEmployeeEdit";
             this.btnEmployeeEdit.Size = new System.Drawing.Size(150, 23);
@@ -216,6 +253,7 @@ namespace PHP_SRePS
             // 
             // btnViewEmployeeSale
             // 
+            this.btnViewEmployeeSale.Enabled = false;
             this.btnViewEmployeeSale.Location = new System.Drawing.Point(394, 327);
             this.btnViewEmployeeSale.Name = "btnViewEmployeeSale";
             this.btnViewEmployeeSale.Size = new System.Drawing.Size(186, 23);
@@ -280,7 +318,7 @@ namespace PHP_SRePS
             this.txbStaffID.Location = new System.Drawing.Point(230, 110);
             this.txbStaffID.Name = "txbStaffID";
             this.txbStaffID.ReadOnly = true;
-            this.txbStaffID.Size = new System.Drawing.Size(100, 23);
+            this.txbStaffID.Size = new System.Drawing.Size(105, 23);
             this.txbStaffID.TabIndex = 9;
             // 
             // lblStaffID
@@ -360,6 +398,7 @@ namespace PHP_SRePS
             // 
             // tabPage2
             // 
+            this.tabPage2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tabPage2.Location = new System.Drawing.Point(4, 24);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -370,6 +409,7 @@ namespace PHP_SRePS
             // 
             // tabPage3
             // 
+            this.tabPage3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -382,12 +422,13 @@ namespace PHP_SRePS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(624, 441);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.lblTitle);
             this.Name = "MainForm";
-            this.Text = "SRaPS V_1.0.1 (Startup)";
+            this.Text = "SRaPS V_1.0.1 (Prototype)";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -429,6 +470,9 @@ namespace PHP_SRePS
         private System.Windows.Forms.TextBox txbBusinessPassword;
         private System.Windows.Forms.Button btnEmployeeEdit;
         private System.Windows.Forms.Button btnClock;
+        private System.Windows.Forms.Label lblEmployeePassword;
+        private System.Windows.Forms.Button btnEmployeePasswordEdit;
+        private System.Windows.Forms.TextBox txbEmployeePassword;
     }
 }
 
