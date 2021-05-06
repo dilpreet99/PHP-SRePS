@@ -19,7 +19,5 @@ namespace PHP_SRePS
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
-
-        public static Business CurrentBusiness = new Business("People's Health Pharmacy", DateTime.Now);
     }
 }
