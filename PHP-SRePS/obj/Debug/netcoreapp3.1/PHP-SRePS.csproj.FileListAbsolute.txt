@@ -1,0 +1,15 @@
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\bin\Debug\netcoreapp3.1\PHP-SRePS.exe
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\bin\Debug\netcoreapp3.1\PHP-SRePS.deps.json
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\bin\Debug\netcoreapp3.1\PHP-SRePS.runtimeconfig.json
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\bin\Debug\netcoreapp3.1\PHP-SRePS.runtimeconfig.dev.json
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\bin\Debug\netcoreapp3.1\PHP-SRePS.dll
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\bin\Debug\netcoreapp3.1\PHP-SRePS.pdb
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\obj\Debug\netcoreapp3.1\PHP-SRePS.csprojAssemblyReference.cache
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\obj\Debug\netcoreapp3.1\PHP_SRePS.Form1.resources
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\obj\Debug\netcoreapp3.1\PHP-SRePS.csproj.GenerateResource.cache
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\obj\Debug\netcoreapp3.1\PHP-SRePS.AssemblyInfoInputs.cache
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\obj\Debug\netcoreapp3.1\PHP-SRePS.AssemblyInfo.cs
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\obj\Debug\netcoreapp3.1\PHP-SRePS.csproj.CoreCompileInputs.cache
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\obj\Debug\netcoreapp3.1\PHP-SRePS.dll
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\obj\Debug\netcoreapp3.1\PHP-SRePS.pdb
+C:\Users\Sam\Documents\GitHub\PHP-SRePS\PHP-SRePS\obj\Debug\netcoreapp3.1\PHP-SRePS.genruntimeconfig.cache
