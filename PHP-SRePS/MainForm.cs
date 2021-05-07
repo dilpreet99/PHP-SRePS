@@ -57,16 +57,14 @@ namespace PHP_SRePS
             {
                 //Allow user to delete default salespeople without authorising
                 business.Staff.Remove(business.Staff[lsbEmployees.SelectedIndex]);
-                staffBindingSource.ResetBindings(false);
+                Refill();
             }
         }
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
             business.AddStaff("New", "Salesperson");
-            staffBindingSource.ResetBindings(false);
-
-            FillEmployeeDetails(business.Staff[lsbEmployees.SelectedIndex]);
+            Refill();
         }
 
         private void btnBusinessPasswordEdit_Click(object sender, EventArgs e)
@@ -142,7 +140,7 @@ namespace PHP_SRePS
             //Refill pages with business data
             txbBusinessName.Text = business.Name;
             txbBusinessPassword.Text = business.Password;
-            if (lsbEmployees.SelectedIndex > 0 && lsbEmployees.SelectedIndex < lsbEmployees.Items.Count)
+            if (lsbEmployees.SelectedIndex > 0 && lsbEmployees.SelectedIndex < lsbEmployees.Items.Count-1)
             {
                 FillEmployeeDetails(business.Staff[lsbEmployees.SelectedIndex]);
             } else

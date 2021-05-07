@@ -85,7 +85,7 @@ namespace PHP_SRePS
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(56, 14);
             this.lblVersion.TabIndex = 2;
-            this.lblVersion.Text = "V_1.0.1";
+            this.lblVersion.Text = "V_1.0.2";
             // 
             // tabControl1
             // 
@@ -428,7 +428,7 @@ namespace PHP_SRePS
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.lblTitle);
             this.Name = "MainForm";
-            this.Text = "SRaPS V_1.0.1 (Prototype)";
+            this.Text = "SRaPS V_1.0.2 (Prototype)";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

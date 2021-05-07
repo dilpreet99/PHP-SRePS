@@ -59,6 +59,7 @@ namespace PHP_SRePS
             // 
             this.txbPassword.Location = new System.Drawing.Point(13, 62);
             this.txbPassword.Name = "txbPassword";
+            this.txbPassword.PlaceholderText = "Password";
             this.txbPassword.Size = new System.Drawing.Size(291, 23);
             this.txbPassword.TabIndex = 2;
             this.txbPassword.UseSystemPasswordChar = true;
@@ -69,7 +70,7 @@ namespace PHP_SRePS
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(162, 23);
             this.btnLogin.TabIndex = 3;
-            this.btnLogin.Text = "Login";
+            this.btnLogin.Text = "Authorise Changes";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLoginForm_Click);
             // 
